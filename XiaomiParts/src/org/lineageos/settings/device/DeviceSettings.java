@@ -22,6 +22,11 @@ import android.os.Bundle;
 import androidx.preference.PreferenceFragment;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
+import android.content.Context;
+import android.content.SharedPreferences;
+import androidx.preference.PreferenceManager;
+import androidx.preference.SwitchPreference;
+
 
 import org.lineageos.settings.device.kcal.KCalSettingsActivity;
 import org.lineageos.settings.device.preferences.SecureSettingListPreference;
@@ -47,6 +52,7 @@ public class DeviceSettings extends PreferenceFragment implements
     public static final  String PREF_MIC_GAIN = "mic_gain";
     public static final  String HEADPHONE_GAIN_PATH = "/sys/kernel/sound_control/headphone_gain";
     public static final  String MIC_GAIN_PATH = "/sys/kernel/sound_control/mic_gain";
+    public static final String PREF_KEY_FPS_INFO = "fps_info";
 
     // value of vtg_min and vtg_max
     public static final int MIN_VIBRATION = 116;
@@ -73,6 +79,8 @@ public class DeviceSettings extends PreferenceFragment implements
     private static final String PREF_DEVICE_JASON = "device_jason";
 
     private SecureSettingListPreference mTHERMAL;
+
+    private static Context mContext;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -103,6 +111,12 @@ public class DeviceSettings extends PreferenceFragment implements
          } else {
         getPreferenceScreen().removePreference(micGain);
         }
+
+        mContext = this.getContext();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SwitchPreference fpsInfo = (SwitchPreference) findPreference(PREF_KEY_FPS_INFO);
+        fpsInfo.setChecked(prefs.getBoolean(PREF_KEY_FPS_INFO, false));
+        fpsInfo.setOnPreferenceChangeListener(this);
 
         PreferenceCategory displayCategory = (PreferenceCategory) findPreference(CATEGORY_DISPLAY);
         if (isAppNotInstalled(DEVICE_DOZE_PACKAGE_NAME)) {
@@ -165,6 +179,16 @@ public class DeviceSettings extends PreferenceFragment implements
             case PREF_HALL_WAKEUP:
                 FileUtils.setValue(HALL_WAKEUP_PATH, (boolean) value ? "Y" : "N");
                 FileUtils.setProp(HALL_WAKEUP_PROP, (boolean) value);
+                break;
+
+            case PREF_KEY_FPS_INFO:
+                boolean enabled = (Boolean) value;
+                Intent fpsinfo = new Intent(this.getContext(), FPSInfoService.class);
+                if (enabled) {
+                    this.getContext().startService(fpsinfo);
+                } else {
+                    this.getContext().stopService(fpsinfo);
+                }
                 break;
 
             default:
