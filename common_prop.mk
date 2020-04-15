@@ -122,6 +122,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.camera.eis.enable=1 \
     persist.vendor.camera.exif.make=Xiaomi \
     persist.vendor.camera.privapp.list=org.codeaurora.snapcam \
+    vendor.camera.aux.packagelist=com.android.camera,org.codeaurora.snapcam,com.android.GoogleCamera \
     vendor.camera.aux.packageblacklist=com.google.android.GoogleCamera,com.discord
 
 # Codec2 switch
