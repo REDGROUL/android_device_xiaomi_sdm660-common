@@ -63,6 +63,18 @@
     <string name="grayscale">Экран в оттенках серого</string>
 
     <string name="presets_dialog_title">Выберите пресет</string>
+    <!-- Presets -->
+    <string name="preset_default">По умолчанию</string>
+    <string name="preset_version_1">Вариант 1</string>
+    <string name="preset_version_2">Вариант 2</string>
+    <string name="preset_version_3">Вариант 3</string>
+    <string name="preset_triluminous">Трилуминозный</string>
+    <string name="preset_deep_black_white">Глубокий черный и белый</string>
+    <string name="preset_deep_natural">Глубокий натуральный</string>
+    <string name="preset_cool_amoled">Крутой Amoled</string>
+    <string name="preset_extreme_amoled">Экстремальный Amoled</string>
+    <string name="preset_warm_amoled">Теплый Amoled</string>
+    <string name="preset_hybrid_mamba">Гибридная Мамба</string>
 
     <!-- menu -->
     <string name="kcal_reset">Вернуть пресет по умолчанию</string>
@@ -71,4 +83,7 @@
     <string name="edit_value">Введите новое значение</string>
     <string name="default_value">Значение по умолчанию</string>
     <string name="edit_hint">Значение между %1$d и %2$d</string>
+    <string name="hall_wakeup_title">Пробуждение откидной крышкой</string>
+    <string name="hall_title">Включить пробуждение откидной крышкой</string>
+    <string name="hall_wakeup_summary">Пробуждение устройства через магнитную откидную крышку</string>
 </resources>
